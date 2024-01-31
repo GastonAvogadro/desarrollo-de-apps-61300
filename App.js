@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import Constants from "expo-constants";
 import {
   Text,
   View,
   Image,
   TextInput,
-  TouchableOpacity,
   StyleSheet,
   Pressable,
   FlatList,
-  Modal
 } from "react-native";
-import Usuario from "./src/components/Usuario";
 import cartLogo from "./assets/cart.png";
+import RemoveModal from "./src/components/RemoveModal";
 
 const DATA = [
   {
@@ -33,22 +32,43 @@ export default function App() {
   // useState y useEffect hooks para controlar el estado de la aplicación y el ciclo de vida de un componente
   const [counter, setCounter] = useState(0);
   const [inputValue, setInputValue] = useState("");
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [itemSelected, setItemSelected] = useState(null);
 
   const handleAddCounter = () => setCounter(counter + 1);
 
   const handleInputChange = (value) => setInputValue(value);
 
+  const handleModal = (id) => {
+    setModalVisible(true);
+    setItemSelected(id);
+    console.log(id);
+  };
+
+  //console.log('Hubo un error en el servidor (no es mi culpa)');
+
   const addItem = () => {
     const newItem = {
       name: inputValue,
-      id: new Date().getTime()
-    }
-    setCartItems([...cartItems, newItem])
-  }
+      id: new Date().getTime(),
+    };
+    setCartItems([...cartItems, newItem]);
+  };
 
   return (
     <View style={styles.container}>
+      {/* El StatusBar controla la barra de estado del dispositivo */}
+      <StatusBar style="auto" />
+
+      {/* Llamamos al modal para eliminar el producto y le pasamos por props toda la data que necesita */}
+      <RemoveModal
+        modalVisible={modalVisible}
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+        setModalVisible={setModalVisible}
+        itemSelected={itemSelected}
+      />
       <View style={styles.header}>
         <Text>CARRITO</Text>
         {/* <Image style={{width: 50, height: 50}} source={{uri: "https://t3.ftcdn.net/jpg/05/60/17/66/360_F_560176615_cUua21qgzxDiLiiyiVGYjUnLSGnVLIi6.jpg"}}/> */}
@@ -76,17 +96,16 @@ export default function App() {
         <FlatList
           data={cartItems}
           renderItem={({ item }) => (
-            <View style={{width: 400}}>
+            <View style={{ width: 400, flexDirection: "row" }}>
               <Text style={styles.product}>{item.name}</Text>
+              <Pressable onPress={() => handleModal(item.id)}>
+                <Text style={{ fontSize: 20 }}>🚮</Text>
+              </Pressable>
             </View>
           )}
           keyExtractor={(item) => item.id}
         />
       </View>
-      <Pressable onPress={handleAddCounter}>
-        <Text style={{ fontSize: 20 }}>{counter}</Text>
-      </Pressable>
-      <Text>Valor del input: {inputValue}</Text>
     </View>
   );
 }
@@ -96,6 +115,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#ededed",
     flex: 1,
     paddingHorizontal: 14,
+    paddingTop: Constants.statusBarHeight,
+  },
+  modalContainer: {
+    height: 200,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    justifyContent: "space-between",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   header: {
     flexDirection: "row",
