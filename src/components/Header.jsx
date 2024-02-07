@@ -13,15 +13,15 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.blue_300,
+    height: 40,
     width: "100%",
-    paddingVertical: 8
+    backgroundColor: colors.blue_300,
+    justifyContent: "center",
+    alignItems: "center",
   },
   text: {
-    fontSize: 30,
+    textAlign: "center",
     color: "white",
-    textAlign: 'center',
-    fontWeight: 'bold'
+    fontSize: 20,
   },
 });

@@ -1,13 +1,13 @@
-import { StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import Card from "./Card";
 
-const CategoryItem = ({ category }) => {
+const CategoryItem = ({ category, setCategorySelected }) => {
   return (
-    <>
-      <Card style={{marginVertical: 20}}>
+    <Card style={{ marginVertical: 20 }}>
+      <Pressable onPress={() => setCategorySelected(category)}>
         <Text style={styles.text}>{category}</Text>
-      </Card>
-    </>
+      </Pressable>
+    </Card>
   );
 };
 
@@ -16,5 +16,6 @@ export default CategoryItem;
 const styles = StyleSheet.create({
   text: {
     fontSize: 25,
+    fontFamily: 'InterRegular'
   },
 });

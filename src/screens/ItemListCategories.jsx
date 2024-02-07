@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, View, FlatList } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import allProducts from "../data/products.json";
 import ProductItem from "../components/ProductItem";
 import Search from "../components/Search";
@@ -14,13 +14,18 @@ function ItemListCategories({ category }) {
       const filteredProducts = products.filter((product) =>
         product.title.includes(keyword)
       );
-      setProducts(filteredProducts)
+      setProducts(filteredProducts);
+    } else {
+      const filteredProducts = allProducts.filter((product) =>
+        product.title.includes(keyword)
+      );
+      setProducts(filteredProducts);
     }
-  }, []);
+  }, [category, keyword]);
 
   return (
-    <View>
-      <Search keyword={keyword} onSearch={setKeyword} />
+    <View style={styles.container}>
+      <Search onSearch={setKeyword} />
       <FlatList
         data={products}
         renderItem={({ item }) => <ProductItem product={item} />}
@@ -31,3 +36,12 @@ function ItemListCategories({ category }) {
 }
 
 export default ItemListCategories;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
