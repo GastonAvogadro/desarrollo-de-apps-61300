@@ -1,29 +1,23 @@
 import { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { useFonts } from "expo-font";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import Constants from "expo-constants";
-import Home from "./src/screens/Home";
-import ItemListCategories from "./src/screens/ItemListCategories";
-import { fonts } from "./src/global/fonts";
 import { StatusBar } from "expo-status-bar";
+import Pokemon from "./src/components/Pokemon";
+import ListOfPokemon from "./src/components/ListOfPokemons";
 
 export default function App() {
-  const [fontsLoaded] = useFonts(fonts);
-
-  const [categorySelected, setCategorySelected] = useState("");
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
+  const [showHome, setShowHome] = useState(true);
+  
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {categorySelected ? (
-        <ItemListCategories category={categorySelected} />
-      ) : (
-        <Home setCategorySelected={setCategorySelected} />
-      )}
+      <Pressable onPress={()=> setShowHome(true)}>
+        <Text>Home</Text>
+      </Pressable>
+      <Pressable onPress={()=> setShowHome(false)}>
+        <Text>List of pokemons</Text>
+      </Pressable>
+      {showHome ? <Pokemon /> : <ListOfPokemon />}
     </View>
   );
 }
