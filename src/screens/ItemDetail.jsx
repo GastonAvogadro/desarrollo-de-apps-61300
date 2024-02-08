@@ -1,14 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import allProducts from "../data/products.json";
 
-const ItemDetail = () => {
-  return (
+const ItemDetail = ({ productDetailId }) => {
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const productFinded = allProducts.find((product) => product.id === productDetailId);
+    setProduct(productFinded);
+  }, [productDetailId]);
+
+  return product ? (
     <View>
-      <Text>ItemDetail</Text>
+      <Text>{product.title}</Text>
     </View>
-  )
-}
+  ) : (
+    <Text>Cargando...</Text>
+  );
+};
 
-export default ItemDetail
+export default ItemDetail;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

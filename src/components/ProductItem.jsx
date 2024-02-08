@@ -1,10 +1,24 @@
+import { useEffect } from "react";
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions } from "react-native";
 import Card from "./Card";
 
 const ProductItem = ({ product, setProductDetailId }) => {
+  const [isPortrait, setIsPortrait] = useState(true);
+  const [isLandscape, setIsLandscape] = useState(false);
+
   const { width, height } = useWindowDimensions();
 
   console.log(width, height);
+
+  useEffect(()=> {
+    if(height > width) {
+      setIsPortrait(true);
+      setIsLandscape(false);
+    } else {
+      setIsPortrait(false);
+      setIsLandscape(true);
+    }
+  }, [width, height])
 
   return (
     <>

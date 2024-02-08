@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { Platform, SafeAreaView, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import Constants from "expo-constants";
 import Home from "./src/screens/Home";
@@ -19,11 +19,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
 
       {productDetailId ? (
-        <ItemDetail />
+        <ItemDetail productDetailId={productDetailId}  />
       ) : categorySelected ? (
         <ItemListCategories
           setCategorySelected={setCategorySelected}
@@ -33,7 +33,7 @@ export default function App() {
       ) : (
         <Home setCategorySelected={setCategorySelected} />
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ededed",
     alignItems: "center",
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0,
   },
 });
