@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions } from "react-native";
 import Card from "./Card";
 
@@ -10,19 +10,19 @@ const ProductItem = ({ product, setProductDetailId }) => {
 
   console.log(width, height);
 
-  useEffect(()=> {
-    if(height > width) {
+  useEffect(() => {
+    if (height > width) {
       setIsPortrait(true);
       setIsLandscape(false);
     } else {
       setIsPortrait(false);
       setIsLandscape(true);
     }
-  }, [width, height])
+  }, [width, height]);
 
   return (
     <>
-      <Pressable onPress={() => setProductDetailId(product.id)}>
+      <Pressable style={styles.card} onPress={() => setProductDetailId(product.id)}>
         <Card
           style={{
             marginVertical: 20,
@@ -30,8 +30,12 @@ const ProductItem = ({ product, setProductDetailId }) => {
             justifyContent: "space-between",
           }}
         >
-          <Text style={width < 400 ? styles.textMin : styles.text}>{product.title}</Text>
-          <Image style={styles.image} source={{ uri: product.images[0] }} />
+          <Text style={width < 350 ? styles.textMin : styles.text}>{product.title}</Text>
+          <Image
+            style={styles.image}
+            resizeMode="cover"
+            source={{ uri: product.thumbnail }}
+          />
         </Card>
       </Pressable>
     </>
@@ -41,16 +45,31 @@ const ProductItem = ({ product, setProductDetailId }) => {
 export default ProductItem;
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    width: "70%",
-  },
-  textMin: {
-    fontSize: 14,
-    width: "70%",
+  card: {
+    height: 100,
+    padding: 20,
+    margin: 15,
+    borderWidth: 2,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 4
   },
   image: {
-    width: 70,
-    height: 70,
+    minHeight: 90,
+    minWidth: 90,
+    width: "30%",
+    borderRadius: 5,
+  },
+  text: {
+    width: "70%",
+    fontFamily: "InterRegular",
+    fontSize: 20,
+  },
+  textMin: {
+    width: "70%",
+    fontFamily: "InterRegular",
+    fontSize: 15,
   },
 });
