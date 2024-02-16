@@ -4,9 +4,11 @@ import allProducts from "../data/products.json";
 import ProductItem from "../components/ProductItem";
 import Search from "../components/Search";
 
-function ItemListCategories({ category, setCategorySelected, setProductDetailId }) {
+function ItemListCategories({ navigation, route }) {
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState("");
+
+  const { category } = route.params;
 
   useEffect(() => {
     if (category) {
@@ -25,13 +27,10 @@ function ItemListCategories({ category, setCategorySelected, setProductDetailId 
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={()=> setCategorySelected('')}>
-        <Text>Inicio</Text>
-      </Pressable>
       <Search onSearch={setKeyword} />
       <FlatList
         data={products}
-        renderItem={({ item }) => <ProductItem product={item} setProductDetailId={setProductDetailId} />}
+        renderItem={({ item }) => <ProductItem product={item} navigation={navigation} />}
         keyExtractor={(item) => item.id}
       />
     </View>

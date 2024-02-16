@@ -4,7 +4,7 @@ import { colors } from "../global/colors";
 
 const CategoryItem = ({ category, navigation }) => {
   return (
-    <Pressable onPress={() => navigation.navigate("ItemDetail")}>
+    <Pressable onPress={() => navigation.navigate("ItemListCategories", {category})}>
       <Card style={styles.cardContainer}>
         <Text style={styles.text}>{category}</Text>
       </Card>

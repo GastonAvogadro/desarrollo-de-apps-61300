@@ -5,7 +5,6 @@ import Categories from "../components/Categories";
 function Home({navigation}) {
   return (
     <View style={styles.container}>
-      <Header title={"Inicio"}/>
       <Categories navigation={navigation}/>
     </View>
   );

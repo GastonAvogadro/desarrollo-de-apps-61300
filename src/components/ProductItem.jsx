@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions } from "react-native";
 import Card from "./Card";
 
-const ProductItem = ({ product, setProductDetailId }) => {
+const ProductItem = ({ product, navigation }) => {
   const [isPortrait, setIsPortrait] = useState(true);
   const [isLandscape, setIsLandscape] = useState(false);
 
@@ -22,7 +22,7 @@ const ProductItem = ({ product, setProductDetailId }) => {
 
   return (
     <>
-      <Pressable style={styles.card} onPress={() => setProductDetailId(product.id)}>
+      <Pressable style={styles.card} onPress={() => navigation.navigate("ItemDetail", {id: product.id})}>
         <Card
           style={{
             marginVertical: 20,

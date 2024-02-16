@@ -3,13 +3,15 @@ import React, { useEffect, useState } from "react";
 import allProducts from "../data/products.json";
 import { colors } from "../global/colors";
 
-const ItemDetail = ({ productDetailId }) => {
+const ItemDetail = ({ navigation, route }) => {
   const [product, setProduct] = useState(null);
 
+  const { id } = route.params;
+
   useEffect(() => {
-    const productFinded = allProducts.find((product) => product.id === productDetailId);
+    const productFinded = allProducts.find((product) => product.id === id);
     setProduct(productFinded);
-  }, [productDetailId]);
+  }, [id]);
 
   return (
     <View style={styles.main}>
