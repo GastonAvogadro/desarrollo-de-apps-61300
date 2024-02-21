@@ -4,7 +4,8 @@ import ShopStack from "../navigation/ShopStack";
 import CartStack from "./CartStack";
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../global/colors";
-import { Entypo, AntDesign } from "@expo/vector-icons";
+import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
+import OrdersStack from "./OrdersStack";
 
 const TabNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -38,8 +39,30 @@ const TabNavigator = () => {
             tabBarIcon: ({ focused }) => {
               return (
                 <View style={styles.tabContainer}>
-                  <AntDesign name="shoppingcart" size={30} color={focused ? "black" : "grey"} />
+                  <AntDesign
+                    name="shoppingcart"
+                    size={30}
+                    color={focused ? "black" : "grey"}
+                  />
                   <Text style={{ color: focused ? "black" : "grey" }}>Cart</Text>
+                </View>
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name="OrdersTab"
+          component={OrdersStack}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <View style={styles.tabContainer}>
+                  <FontAwesome
+                    name="list-ul"
+                    size={30}
+                    color={focused ? "black" : "grey"}
+                  />
+                  <Text style={{ color: focused ? "black" : "grey" }}>Orders</Text>
                 </View>
               );
             },
