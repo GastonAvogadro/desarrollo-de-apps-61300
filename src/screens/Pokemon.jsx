@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Image, Text, View, StyleSheet, Pressable } from "react-native";
 
-function Pokemon() {
+function Pokemon({navigation}) {
   const [counter, setCounter] = useState(1);
   const [pokemon, setPokemon] = useState(null);
 
@@ -19,6 +19,9 @@ function Pokemon() {
       </Pressable>
       <Text>{pokemon.name}</Text>
       <Image style={styles.image} source={{ uri: pokemon.sprites.front_default }} />
+      <Pressable onPress={()=> navigation.navigate("ListOfPokemon")}>
+        <Text>Lista de pokemons ➡</Text>
+      </Pressable>
     </View>
   ) : (
     <Text>Cargando...</Text>
