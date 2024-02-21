@@ -6,12 +6,18 @@ import { NavigationContainer } from "@react-navigation/native";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  <NavigationContainer>
-    <Tab.Navigator>
-      <Tab.Screen name="PokemonTab" component={PokemonStack} />
-      <Tab.Screen name="RickAndMortyTab" component={RickAndMortyStack} />
-    </Tab.Navigator>
-  </NavigationContainer>
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Tab.Screen name="PokemonTab" component={PokemonStack} />
+        <Tab.Screen name="RickAndMortyTab" component={RickAndMortyStack} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 };
 
 export default TabNavigator;
