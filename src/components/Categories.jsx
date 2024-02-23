@@ -1,9 +1,11 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import categories from "../data/categories.json";
 import CategoryItem from "./CategoryItem";
 import Counter from "./Counter";
+import { useSelector } from "react-redux";
 
-function Categories({navigation}) {
+function Categories({ navigation }) {
+  const categories = useSelector((state) => state.shopReducer.value.categories);
+
   return (
     <View style={styles.container}>
       <Counter />
