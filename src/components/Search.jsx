@@ -45,8 +45,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "flex-start",
-    width: '100%',
-    flex: 1
   },
   inputContainer: {
     flexDirection: "row",
