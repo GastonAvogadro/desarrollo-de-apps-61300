@@ -10,9 +10,6 @@ const Login = () => {
       <Text>Login</Text>
       <InputForm label={"Email"} error={""} onChange={onChange} />
       <InputForm label={"Password"} error={""} onChange={onChange} />
-      <Pressable>
-        <Text>Login</Text>
-      </Pressable>
     </View>
   );
 };
