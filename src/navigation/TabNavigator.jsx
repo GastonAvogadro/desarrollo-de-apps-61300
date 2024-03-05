@@ -4,8 +4,9 @@ import ShopStack from "../navigation/ShopStack";
 import CartStack from "./CartStack";
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../global/colors";
-import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
+import { Entypo, AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import OrdersStack from "./OrdersStack";
+import MyProfileStack from "./MyProfileStack";
 
 const TabNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -62,6 +63,24 @@ const TabNavigator = () => {
                   color={focused ? "black" : "grey"}
                 />
                 <Text style={{ color: focused ? "black" : "grey" }}>Orders</Text>
+              </View>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="MyProfileStack"
+        component={MyProfileStack}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View style={styles.tabContainer}>
+                <Ionicons
+                  name="person-circle-outline"
+                  size={30}
+                  color={focused ? "black" : "grey"}
+                />
+                <Text style={{ color: focused ? "black" : "grey" }}>My profile</Text>
               </View>
             );
           },
