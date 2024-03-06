@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { signupSchema } from "../validations/signupSchema";
 
-const Signup = () => {
+const Signup = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [errorMail, setErrorMail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +54,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (result.data) {
-      dispatch(setUser(result));
+      dispatch(setUser(result.data));
     }
   }, [result]);
 
@@ -74,6 +74,9 @@ const Signup = () => {
         onChange={setConfirmPassword}
         isSecure={true}
       />
+      <Pressable onPress={() => navigation.navigate("Login")}>
+        <Text>Ir al login</Text>
+      </Pressable>
       <SubmitButton title={"Register"} onPress={onSubmit} />
     </View>
   );
