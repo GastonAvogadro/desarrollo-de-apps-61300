@@ -1,24 +1,34 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { colors } from "../global/colors";
+import { useSelector } from "react-redux";
 
-const MyProfile = ({navigation}) => {
-  const [image, setImage] = useState(null);
+const MyProfile = ({ navigation }) => {
+  const { profileImage, imageCamera } = useSelector((state) => state.authReducer.value);
 
   return (
     <View style={styles.container}>
-      {image ? null : (
+      {profileImage || imageCamera ? (
+        <Image
+          source={{ uri: profileImage || imageCamera }}
+          resizeMode="cover"
+          style={styles.image}
+        />
+      ) : (
         <>
           <Image
             source={require("../../assets/defaultProfile.png")}
             style={styles.image}
             resizeMode="cover"
           />
-          <Pressable style={styles.button} onPress={()=> navigation.navigate("Image Selector")}>
-            <Text style={styles.text}>Add profile picture</Text>
-          </Pressable>
         </>
       )}
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Image Selector")}
+      >
+        <Text style={styles.text}>Add profile picture</Text>
+      </Pressable>
     </View>
   );
 };
