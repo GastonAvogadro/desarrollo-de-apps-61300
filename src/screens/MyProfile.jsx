@@ -29,6 +29,12 @@ const MyProfile = ({ navigation }) => {
       >
         <Text style={styles.text}>Add profile picture</Text>
       </Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Location Selector")}
+      >
+        <Text style={styles.text}>My addresses</Text>
+      </Pressable>
     </View>
   );
 };
