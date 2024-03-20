@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import React, { useEffect } from "react";
 import TabNavigator from "./TabNavigator";
 import AuthStack from "./AuthStack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -13,7 +13,7 @@ import { fetchSession } from "../db";
 
 const MainNavigator = () => {
   const { user, localId } = useSelector((state) => state.authReducer.value);
-  const { data, error, isLoading } = useGetProfileImageQuery(localId);
+  const { data } = useGetProfileImageQuery(localId);
   const { data: location } = useGetUserLocationQuery(localId);
 
   const dispatch = useDispatch();
@@ -22,8 +22,6 @@ const MainNavigator = () => {
     (async () => {
       try {
         const session = await fetchSession();
-        console.log('aaaaaa'); 
-        console.log("local", session.rows._array);
         if (session?.rows.length) {
           const user = session.rows._array[0];
           dispatch(setUser(user));
@@ -32,12 +30,10 @@ const MainNavigator = () => {
         console.log(error.message);
       }
     })();
-
   }, []);
 
   useEffect(() => {
     if (data) {
-      console.log(data.image);
       dispatch(setProfileImage(data.image));
     }
     if (location) {

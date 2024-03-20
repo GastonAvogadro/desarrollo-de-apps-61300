@@ -4,6 +4,7 @@ import allProducts from "../data/products.json";
 import { colors } from "../global/colors";
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/shop/cartSlice";
+import StyledText from "../styledComponents/StyledText";
 
 const ItemDetail = ({ navigation, route }) => {
   const [product, setProduct] = useState(null);
@@ -31,9 +32,9 @@ const ItemDetail = ({ navigation, route }) => {
             resizeMode="cover"
           />
           <View style={styles.textContainer}>
-            <Text style={styles.descriptionText}>{product.title}</Text>
-            <Text style={styles.descriptionText}>{product.description}</Text>
-            <Text style={styles.descriptionTextPrice}>${product.price}</Text>
+            <StyledText size20 bold>{product.title}</StyledText>
+            <StyledText>{product.description}</StyledText>
+            <StyledText>${product.price}</StyledText>
             <Pressable style={styles.buy} onPress={onAddCart}>
               <Text style={styles.buyText}>Add to cart</Text>
             </Pressable>

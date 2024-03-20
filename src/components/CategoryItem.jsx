@@ -3,6 +3,7 @@ import Card from "./Card";
 import { colors } from "../global/colors";
 import { useDispatch } from "react-redux";
 import { setCategorySelected } from "../features/shop/shopSlice";
+import StyledText from "../styledComponents/StyledText";
 
 const CategoryItem = ({ category, navigation }) => {
   const dispatch = useDispatch()
@@ -15,7 +16,8 @@ const CategoryItem = ({ category, navigation }) => {
       }}
     >
       <Card style={styles.cardContainer}>
-        <Text style={styles.text}>{category}</Text>
+        {/* <Text style={styles.text}>{category}</Text> */}
+        <StyledText bold size20 white>{category}</StyledText>
       </Card>
     </Pressable>
   );
@@ -33,8 +35,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blue_200,
     borderRadius: 10,
   },
-  text: {
-    fontFamily: "InterBold",
-    fontSize: 20,
-  },
+  // text: {
+  //   fontFamily: "InterBold",
+  //   fontSize: 20,
+  // },
 });

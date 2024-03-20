@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import ShopStack from "../navigation/ShopStack";
 import CartStack from "./CartStack";
 import { StyleSheet, Text, View } from "react-native";
